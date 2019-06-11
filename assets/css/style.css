@@ -1,0 +1,41 @@
+.backgroundimage{
+    background-image: url("../image/pic\ 5.jpg");
+    /*background-image: url("../image/Psychic-Abilities-List-Psychic-Powers-Types-1200x899.jpg");*/
+    height: 800px;
+    width:  auto;
+    background-color: blue;
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    padding-top: 10px;
+    
+    
+}
+
+.container{
+background-color: gold;
+height: 500px;
+width: auto;
+margin:25%;
+margin-top: 2%;
+text-align: center;
+}
+
+.heading{
+    text-align: center;
+    color: blue;
+
+}
+
+#startGame:hover{
+    background-color: red;
+    
+    
+}
+.startGamecontainer{
+    border: 1px solid;
+    width: 50%;
+    margin: 25%;
+    font
+
+
+}
