@@ -10,7 +10,7 @@ var question = [
         A3: "Delhi",
         A4: "New York",
         CA: "Abu Dabi",
-        Image: "../assets/image/Abud.gif"
+        Image: "../TriviaGame/assets/image/Abudabi.gif"
     },
 
     {
@@ -19,7 +19,8 @@ var question = [
         A2: "Hongkong",
         A3: "Delhi",
         A4: "Doha",
-        CA: "Delhi"
+        CA: "Delhi",
+        Image: "../TriviaGame/assets/image/Delhi.gif"
     },
 
     {
@@ -29,7 +30,7 @@ var question = [
         A3: "Bamako",
         A4: "Apia",
         CA: "Athens",
-        Image: "../assets/image/Athens.gif"
+        Image: "../TriviaGame/assets/image/Athens.gif"
     },
 
 
@@ -39,7 +40,9 @@ var question = [
         A2: "George Town",
         A3: "Brasília",
         A4: "Beijing",
-        CA: "Beijing"
+        CA: "Beijing",
+        Image: "../TriviaGame/assets/image/Beijing.gif"
+
     },
 
     {
@@ -49,121 +52,117 @@ var question = [
         A3: "Kampala",
         A4: "Juba",
         CA: "Kathmandu",
+        Image: "../TriviaGame/assets/image/Kathmandu.gif"
     }
 ];
 var timeleft = 30;
 var intervalId = 0;
 function showQuestion() {
 
-    if (qCount === question.length) {
-        stopGame()
-    }
-    else {
-        $(".inner-container").css({ "list-style-type": "none" }).html("<li id = \"Q\" > <h1>" + question[qCount].Question + "</h1></li>")
-        $(".inner-container").append("<li id = \"A1\" > <h2>" + question[qCount].A1 + "</h2> </li>")
-        $(".inner-container").append("<li id = \"A2\"> <h2>" + question[qCount].A2 + "</h2> </li>")
-        $(".inner-container").append("<li id = \"A3\"> <h2>" + question[qCount].A3 + "</h2> </li>")
-        $(".inner-container").append("<li id = \"A4\"> <h2>" + question[qCount].A4 + "</h2> </li>")
-
-
-        $("#A1").click(function () {
-
-            if (question[qCount].A1 === question[qCount].CA) {
-                alert("correct answer");
-                qCount++;
-                win++;
-                showQuestion();
-                restTimer();
-
-
-            } else {
-                alert("wrong answer")
-                qCount++;
-                loose++;
-                showQuestion();
-                restTimer();
-
-
-            }
-        });
-
-        $("#A2").click(function () {
-
-            if (question[qCount].A2 === question[qCount].CA) {
-                alert("correct answer");
-                qCount++;
-                win++;
-                showQuestion();
-                restTimer();
-
-            } else {
-                alert("wrong answer")
-                qCount++;
-                loose++
-                showQuestion();
-                restTimer();
-
-            }
-
-        });
-
-
-        $("#A3").click(function () {
-
-            if (question[qCount].A3 === question[qCount].CA) {
-                alert("correct answer");
-                qCount++;
-                win++;
-                showQuestion();
-                restTimer();
-
-            } else {
-                alert("wrong answer")
-                qCount++;
-                loose++;
-                showQuestion();
-                restTimer();
-
-            }
-        });
-
-
-        $("#A4").click(function () {
-
-            if (question[qCount].A4 === question[qCount].CA) {
-                alert("correct answer");
-                qCount++;
-                win++;
-                showQuestion()
-                restTimer();
-
-            } else {
-                alert("wrong answer")
-                qCount++;
-                loose++;
-                showQuestion();
-                restTimer();
-
-            }
-        });
-
+    if (qCount < question.length) {
+        restTimer();
+        $("#Q").show(); $("#Q").text(question[qCount].Question);
+        $("#A1").show(); $("#A1").text(question[qCount].A1);
+        $("#A2").show(); $("#A2").text(question[qCount].A2);
+        $("#A3").show(); $("#A3").text(question[qCount].A3);
+        $("#A4").show(); $("#A4").text(question[qCount].A4);
     }
 }
 
-$(document).ready(function () {
 
-    $("#startGame").on("click", function () {
-        $("#startGame").hide();
+$("#startGame").on("click", function () {
+    $("#startGame").hide();
+    $("#Country").hide();
 
+    if (qCount < question.length)
+    {
         showQuestion();
         showTimer();
-        run();
-    });
+    }else 
+    {
+        stopGame();
+    }
+
+});
+
+$("#restartgame").click(function(){
+    $("#restartgame").hide()
+    $("#wins").hide()
+    $("#losses").hide();
+    $("#startGame").text("Start Game");
+    $("#startGame").show();
+    $(".time").hide();
+    qCount = 0;
+
+})
+
+$("#A1").click(function () {
+
+    if (question[qCount].A1 === question[qCount].CA) {
+        alert("correct answer");
+        clearInterval(intervalId);
+        win++;
+    } else {
+        alert("wrong answer");
+        clearInterval(intervalId);
+        loose++;
+    }
+    showImage();
+    qCount++;
 
 
+});
+
+$("#A2").click(function () {
+
+    if (question[qCount].A2 === question[qCount].CA) {
+        alert("correct answer");
+        clearInterval(intervalId);
+        win++;
 
 
+    } else {
+        alert("wrong answer");
+        clearInterval(intervalId);
+        loose++;
 
+    }
+    showImage();
+    qCount++;
+
+});
+
+
+$("#A3").click(function () {
+
+    if (question[qCount].A3 === question[qCount].CA) {
+        alert("correct answer");
+        clearInterval(intervalId);
+        win++;
+    } else {
+        alert("wrong answer");
+        clearInterval(intervalId);
+        loose++;
+    }
+    showImage();
+    qCount++;
+});
+
+
+$("#A4").click(function () {
+
+    if (question[qCount].A4 === question[qCount].CA) {
+        alert("correct answer");
+        clearInterval(intervalId);
+        win++;
+    }
+    else {
+        alert("wrong answer");
+        clearInterval(intervalId);
+        loose++;
+    }
+    showImage();
+    qCount++;
 
 
 });
@@ -171,7 +170,9 @@ $(document).ready(function () {
 
 
 function showTimer() {
+    
     $(".time").html("<h3>" + " Time remaninig is " + timeleft + "</h3>")
+    $(".time").show();
 }
 
 
@@ -187,7 +188,10 @@ function decrement() {
     showTimer();
     if (timeleft === 0) {
         alert("Time Up!");
+        loose++;
         clearInterval(intervalId);
+        showImage();
+        qCount++;
     }
 }
 function restTimer() {
@@ -198,6 +202,30 @@ function restTimer() {
 
 
 }
+function showImage() {
+    $("#Q").hide();
+    $("#A1").hide();
+    $("#A2").hide();
+    $("#A3").hide();
+    $("#A4").hide();
+    $("#Country").show();
+    $("#Country").attr('src', question[qCount].Image);
+    $("#startGame").text("Click to Continue");
+    $("#startGame").show();
+    $("#correctAnswer").show();
+    $("#correctAnswer").text( question[qCount].CA);
+
+    $("#startGame").click(function () {
+        $("#startGame").hide();
+        $("#Country").hide();
+        $("#correctAnswer").hide();
+
+        showQuestion();
+        showTimer();
+
+    });
+}
+
 
 function stopGame() {
     $("#Q").hide();
@@ -206,13 +234,13 @@ function stopGame() {
     $("#A3").hide();
     $("#A4").hide();
     clearInterval(intervalId);
-
-    //$(".inner-container").css({ "font : family " }).html("<li id = \"Q\" > <h1>" + question[qCount].Question + "</h1></li>")
-    $(".inner-container").append("<h3>Correct Answer: " + win + "</h3>");
-    $(".inner-container").append("<h3>Incorrect Anaswer:" + loose + "</h3>");
-
-
-
-
+    $(".time").hide();
+    
+    $("#wins").text("Correct Answer: " + win  );
+    $("#losses").text("Incorrect Anaswer:" + loose );
+    $("#wins").show()
+    $("#losses").show();
+    $("#restartgame").text("Restart Game");
+    $("#restartgame").show();
 }
 
